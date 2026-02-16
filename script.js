@@ -1,5 +1,5 @@
 document.addEventListener('DOMContentLoaded', () => {
-    
+
     // Inputs
     const complexityInput = document.getElementById('complexity');
     const uncertaintyInput = document.getElementById('uncertainty');
@@ -9,7 +9,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // Display Values
     const complexityValDisplay = document.getElementById('complexity-val');
     const uncertaintyValDisplay = document.getElementById('uncertainty-val');
-    
+
     // Results
     const finalHoursDisplay = document.getElementById('final-hours');
     const confidenceScoreDisplay = document.getElementById('confidence-score');
@@ -33,7 +33,7 @@ document.addEventListener('DOMContentLoaded', () => {
         // Framework Formula
         // 1. Complexity Multiplier: 1 + (Complexity * 0.1) -> 1.1 to 2.0x
         const complexityMultiplier = 1 + (complexity * 0.1);
-        
+
         // 2. Uncertainty Multiplier: 1 + (Uncertainty * 0.15) -> 1.15 to 2.5x  (Higher weight)
         const uncertaintyMultiplier = 1 + (uncertainty * 0.15);
 
@@ -48,7 +48,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         // 5. Confidence Score (Inverse of uncertainty)
         // 10 uncertainty = 10% confidence, 1 uncertainty = 90% confidence
-        const confidence = 100 - (uncertainty * 8); 
+        const confidence = 100 - (uncertainty * 8);
 
         finalHoursDisplay.textContent = Math.round(estimatedHours);
         confidenceScoreDisplay.textContent = `${Math.max(10, confidence)}%`;
@@ -63,11 +63,19 @@ document.addEventListener('DOMContentLoaded', () => {
     calculate();
 });
 
-function copyPrompt() {
-    const text = document.getElementById('prompt-text').innerText;
+function copyPrompt(elementId, btnElement) {
+    const text = document.getElementById(elementId).innerText;
     navigator.clipboard.writeText(text).then(() => {
-        const btn = document.querySelector('.btn-copy');
-        btn.textContent = "Copied!";
-        setTimeout(() => btn.textContent = "Copy to Clipboard", 2000);
+        const originalText = btnElement.textContent;
+        btnElement.textContent = "Copied!";
+        btnElement.classList.add('btn-success');
+
+        // Show preview
+        document.getElementById('preview-area').innerText = text.substring(0, 500) + "\n\n... (Full prompt copied to clipboard)";
+
+        setTimeout(() => {
+            btnElement.textContent = originalText;
+            btnElement.classList.remove('btn-success');
+        }, 2000);
     });
 }
