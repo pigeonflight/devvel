@@ -132,8 +132,20 @@
     <section id="prompts" class="section">
         <div class="container">
             <h2 class="section-title">LLM Prompts</h2>
-            <p>Use this System Prompt to calibrate your LLM (Claude/ChatGPT) for accurate estimations based on your
-                historical velocity.</p>
+            <div class="usage-grid">
+                <div class="usage-card">
+                    <h3>Option 1: From Specification</h3>
+                    <p>Paste the prompt below into <strong>ChatGPT or Claude</strong>. Then, paste your
+                        requirements/spec. The AI will break it down into implied database, API, and UI tasks.</p>
+                </div>
+                <div class="usage-card">
+                    <h3>Option 2: Inside Codebase (Cursor)</h3>
+                    <p>Add this to your <strong>.cursorrules</strong> file or "System Prompt" settings. The AI will
+                        analyze your <strong>actual file structure</strong> to count existing "Vertical Slices" and
+                        estimate new ones based on your code patterns.</p>
+                </div>
+            </div>
+            <p class="prompt-intro">Copy the System Prompt below:</p>
             <div class="prompt-box">
                 <pre id="prompt-text"># Development Velocity Estimation Framework (System Prompt)
 
