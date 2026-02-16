@@ -72,6 +72,12 @@ document.addEventListener('DOMContentLoaded', () => {
         document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
         btnElement.classList.add('active');
 
+        // Toggle Codebase Tip
+        const tip = document.getElementById('codebase-tip');
+        if (tip) {
+            tip.style.display = (elementId === 'prompt-codebase') ? 'block' : 'none';
+        }
+
         // Reset Copy Button
         const copyBtn = document.getElementById('main-copy-btn');
         if (copyBtn) {
