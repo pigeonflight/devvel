@@ -193,6 +193,15 @@
                     Codebase</button>
             </div>
 
+            <div class="prompt-box">
+                <div class="prompt-header">
+                    <p class="prompt-preview-label">Prompt Preview:</p>
+                    <button class="btn-copy" id="main-copy-btn" onclick="copyCurrentPrompt(this)">Copy Full
+                        Prompt</button>
+                </div>
+                <pre id="preview-area" class="preview-content"></pre>
+            </div>
+
             <!-- Hidden raw text for copying -->
             <div style="display:none;">
                 <pre id="prompt-spec"># Development Velocity Estimation Framework (System Prompt - Specification Mode)
