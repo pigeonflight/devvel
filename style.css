@@ -405,7 +405,44 @@ input[type=range]::-webkit-slider-runnable-track {
     right: 10px;
 }
 
+.experiment-content {
+    max-width: 800px;
+    margin-bottom: 40px;
+}
+
+.lead {
+    font-size: 1.25rem;
+    color: #444;
+    line-height: 1.6;
+    margin-bottom: 30px;
+}
+
+.experiment-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 30px;
+}
+
+.experiment-item h4 {
+    color: var(--primary-color);
+    margin-bottom: 15px;
+    font-size: 1.1rem;
+}
+
+.experiment-item p {
+    font-size: 0.95rem;
+    color: #666;
+    line-height: 1.5;
+}
+
+@media (max-width: 768px) {
+    .experiment-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
 /* Footer */
+
 footer {
     background: #111;
     color: #666;
