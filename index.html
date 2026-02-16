@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DevVel - Development Velocity Estimation</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="icon" type="image/svg+xml" href="https://cdn.prod.website-files.com/5c110fe5dc4cae59e8f70cf0/60e662009344617559462ae6_incrementic-main-logo.svg">
+</head>
+<body>
+
+    <!-- Header -->
+    <header>
+        <div class="container">
+            <div class="logo-area">
+                <img src="https://cdn.prod.website-files.com/5c110fe5dc4cae59e8f70cf0/60e662009344617559462ae6_incrementic-main-logo.svg" alt="Incrementic Logo" class="logo">
+                <span class="divider">|</span>
+                <span class="tagline">INNOVATION & DESIGN</span>
+            </div>
+            <nav>
+                <a href="#calculator">Calculator</a>
+                <a href="#guide">Guide</a>
+                <a href="#prompts">Prompts</a>
+                <a href="https://incrementic.com" target="_blank" class="btn-primary">Let's Talk &rarr;</a>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-bg">
+            <!-- Geometric patterns will be CSS/SVG background -->
+        </div>
+        <div class="container hero-content">
+            <h1 class="hero-title">
+                <span class="light">the</span>shortest<br>
+                <span class="bold">distance</span><span class="light italic">to</span><br>
+                accurate<br>
+                <span class="bold">estimations</span>
+            </h1>
+            <p class="hero-subtitle">
+                Bring order to the chaos of software estimation with the DevVel framework.
+            </p>
+            <a href="#calculator" class="btn-hero">Start Estimating</a>
+        </div>
+    </section>
+
+    <!-- Calculator Section -->
+    <section id="calculator" class="section">
+        <div class="container">
+            <h2 class="section-title">Velocity Calculator</h2>
+            <div class="card">
+                <form id="velocity-form">
+                    <div class="form-grid">
+                        <div class="form-group">
+                            <label for="complexity">Task Complexity (1-10)</label>
+                            <input type="range" id="complexity" min="1" max="10" value="5" class="slider">
+                            <span class="slider-value" id="complexity-val">5</span>
+                            <small>Based on technical difficulty and logical depth.</small>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="uncertainty">Uncertainty (1-10)</label>
+                            <input type="range" id="uncertainty" min="1" max="10" value="3" class="slider">
+                            <span class="slider-value" id="uncertainty-val">3</span>
+                            <small>Unknowns, dependencies, and clarity of requirements.</small>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="skills">Team Skill Factor (0.5 - 2.0)</label>
+                            <select id="skills" class="input-field">
+                                <option value="0.5">Junior / New Context (0.5x)</option>
+                                <option value="0.8">Learning (0.8x)</option>
+                                <option value="1.0" selected>Competent (1.0x)</option>
+                                <option value="1.2">Experienced (1.2x)</option>
+                                <option value="1.5">Expert (1.5x)</option>
+                                <option value="2.0">10x Engineer (2.0x)</option>
+                            </select>
+                        </div>
+                         
+                        <div class="form-group">
+                             <label for="base-effort">Base Effort (Hours)</label>
+                             <input type="number" id="base-effort" value="4" class="input-field" min="1">
+                             <small>Ideal hours if you knew exactly what to do.</small>
+                        </div>
+                    </div>
+
+                    <div class="result-area">
+                        <div class="result-item">
+                            <span class="label">Estimated Hours</span>
+                            <span class="value" id="final-hours">--</span>
+                        </div>
+                        <div class="result-item">
+                            <span class="label">Confidence Score</span>
+                            <span class="value" id="confidence-score">--%</span>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Guide Section -->
+    <section id="guide" class="section bg-light">
+        <div class="container">
+            <h2 class="section-title">How It Works</h2>
+            <div class="guide-grid">
+                <div class="guide-item">
+                    <h3>1. Complexity</h3>
+                    <p>Evaluate the inherent difficulty of the problem. Higher complexity increases the base time multiplier.</p>
+                </div>
+                <div class="guide-item">
+                    <h3>2. Uncertainty</h3>
+                    <p>Account for "known unknowns". High uncertainty drastically reduces confidence and adds buffer time.</p>
+                </div>
+                <div class="guide-item">
+                    <h3>3. Velocity</h3>
+                    <p>Adjust for the executor's familiarity with the codebase and technology stack.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Prompts Section -->
+    <section id="prompts" class="section">
+        <div class="container">
+             <h2 class="section-title">LLM Prompts</h2>
+             <p>Use these prompts with ChatGPT or Claude to get better estimates.</p>
+             <div class="prompt-box">
+                 <pre id="prompt-text">Act as a senior engineering lead. I need to estimate a task with the following details:
+[INSERT TASK DESCRIPTION]
+
+Using the DevVel framework:
+1. Assess Complexity (1-10) based on...
+2. Assess Uncertainty (1-10) based on...
+3. Provide a conservative estimate range.</pre>
+                 <button class="btn-copy" onclick="copyPrompt()">Copy to Clipboard</button>
+             </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2026 Incrementic. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
