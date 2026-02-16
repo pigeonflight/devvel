@@ -1,20 +1,24 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>DevVel - Development Velocity Estimation</title>
     <link rel="stylesheet" href="style.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
-    <link rel="icon" type="image/svg+xml" href="https://cdn.prod.website-files.com/5c110fe5dc4cae59e8f70cf0/60e662009344617559462ae6_incrementic-main-logo.svg">
+    <link rel="icon" type="image/svg+xml"
+        href="https://cdn.prod.website-files.com/5c110fe5dc4cae59e8f70cf0/60e662009344617559462ae6_incrementic-main-logo.svg">
 </head>
+
 <body>
 
     <!-- Header -->
     <header>
         <div class="container">
             <div class="logo-area">
-                <img src="https://cdn.prod.website-files.com/5c110fe5dc4cae59e8f70cf0/60e662009344617559462ae6_incrementic-main-logo.svg" alt="Incrementic Logo" class="logo">
+                <img src="https://cdn.prod.website-files.com/5c110fe5dc4cae59e8f70cf0/60e662009344617559462ae6_incrementic-main-logo.svg"
+                    alt="Incrementic Logo" class="logo">
                 <span class="divider">|</span>
                 <span class="tagline">INNOVATION & DESIGN</span>
             </div>
@@ -22,7 +26,7 @@
                 <a href="#calculator">Calculator</a>
                 <a href="#guide">Guide</a>
                 <a href="#prompts">Prompts</a>
-                <a href="https://incrementic.com" target="_blank" class="btn-primary">Let's Talk &rarr;</a>
+                <a href="https://incrementic.com/contact" target="_blank" class="btn-primary">Let's Talk &rarr;</a>
             </nav>
         </div>
     </header>
@@ -78,11 +82,11 @@
                                 <option value="2.0">10x Engineer (2.0x)</option>
                             </select>
                         </div>
-                         
+
                         <div class="form-group">
-                             <label for="base-effort">Base Effort (Hours)</label>
-                             <input type="number" id="base-effort" value="4" class="input-field" min="1">
-                             <small>Ideal hours if you knew exactly what to do.</small>
+                            <label for="base-effort">Base Effort (Hours)</label>
+                            <input type="number" id="base-effort" value="4" class="input-field" min="1">
+                            <small>Ideal hours if you knew exactly what to do.</small>
                         </div>
                     </div>
 
@@ -108,11 +112,13 @@
             <div class="guide-grid">
                 <div class="guide-item">
                     <h3>1. Complexity</h3>
-                    <p>Evaluate the inherent difficulty of the problem. Higher complexity increases the base time multiplier.</p>
+                    <p>Evaluate the inherent difficulty of the problem. Higher complexity increases the base time
+                        multiplier.</p>
                 </div>
                 <div class="guide-item">
                     <h3>2. Uncertainty</h3>
-                    <p>Account for "known unknowns". High uncertainty drastically reduces confidence and adds buffer time.</p>
+                    <p>Account for "known unknowns". High uncertainty drastically reduces confidence and adds buffer
+                        time.</p>
                 </div>
                 <div class="guide-item">
                     <h3>3. Velocity</h3>
@@ -121,22 +127,92 @@
             </div>
         </div>
     </section>
-    
+
     <!-- Prompts Section -->
     <section id="prompts" class="section">
         <div class="container">
-             <h2 class="section-title">LLM Prompts</h2>
-             <p>Use these prompts with ChatGPT or Claude to get better estimates.</p>
-             <div class="prompt-box">
-                 <pre id="prompt-text">Act as a senior engineering lead. I need to estimate a task with the following details:
-[INSERT TASK DESCRIPTION]
+            <h2 class="section-title">LLM Prompts</h2>
+            <p>Use this System Prompt to calibrate your LLM (Claude/ChatGPT) for accurate estimations based on your
+                historical velocity.</p>
+            <div class="prompt-box">
+                <pre id="prompt-text"># Development Velocity Estimation Framework (System Prompt)
 
-Using the DevVel framework:
-1. Assess Complexity (1-10) based on...
-2. Assess Uncertainty (1-10) based on...
-3. Provide a conservative estimate range.</pre>
-                 <button class="btn-copy" onclick="copyPrompt()">Copy to Clipboard</button>
-             </div>
+**Role**: You are an Expert Technical Project Manager and Senior Architect. Your goal is to analyze input (Software Specifications OR Codebase Summaries) and provide a development effort estimate based on the developer's **ACTUAL HISTORICAL VELOCITY**.
+
+## 1. Official Historical Benchmarks (Calibrated Data)
+
+These metrics are derived from actual performance logs (Jan 20-23, 2026). **You MUST use these specific rates as your baseline.**
+
+### The "Standard Unit of Work" (1 CU)
+A single "Vertical Slice" involving:
+-   **Database**: Schema change (e.g., new table or column).
+-   **API**: RPC or Route update.
+-   **UI**: Component update or new page.
+
+### Observed Velocity Rates
+| Condition | Throughput | Time per Unit | Context |
+| :--- | :--- | :--- | :--- |
+| **Peak Flow** | ~3.5 Slices / Hour | **~17 mins** | Highly focused coding sessions (morning sprints). |
+| **Sustained/Complex** | ~1.8 Slices / Hour | **~33 mins** | Mid-day work or tasks requiring thought/debugging. |
+| **Conservative Average** | ~1.3 Slices / Hour | **~45 mins** | Use this for **General Estimation** unless instructed otherwise. |
+
+### Complexity Rubric (Calibrated)
+
+| Classification | Historical Time | Description | Examples |
+| :--- | :--- | :--- | :--- |
+| **Micro** | **0.25h** (15m) | Minor text/style changes, single-field DB updates, config tweaks. | "Change button color", "Fix typo in H1", "Add 'active' boolean to User table". |
+| **Small** | **0.50h** (30m) | Logic tweaks, new helper functions, extending existing components slightly. | "Add form validation", "Create a 'formatCurrency' helper", "Add a tooltip to an icon". |
+| **Medium** | **0.75h** (45m) | **[Standard Vertical Slice]** New DB Table/Column + API Route/RPC + UI Component. | "Create 'Comments' feature: DB table, API to post/fetch, UI component to display list." |
+| **Large** | **1.50h+** (90m+) | New concepts requiring new libraries, file handling, or major refactors. | "Integrate Stripe Payments", "Build a drag-and-drop file uploader with cropping", "Refactor Auth system". |
+
+*Note: The developer works in "Burst" intervals. Tasks > 90 mins (1.5h) should be broken down further.*
+
+## 2. Analysis Process
+
+### Step 1: Deconstruct
+Analyze the input text. Break it down into discrete, implementable tasks.
+- If input is **Spec**: Look for "User shall..." or "System must..." statements. Identify implied backend work (DB/API) for every frontend feature.
+- If input is **Codebase/File Tree**: Count the number of "Vertical Slices" (e.g., pairs of `page.tsx`/`route.ts` or distinct components).
+
+### Step 2: Classify
+Assign a Complexity (Micro, Small, Medium, Large) to each task based strictly on the table above. 
+**Do not use generic industry averages.** Use the specific times provided (0.25h, 0.5h, 1.0h, 2.0h).
+
+### Step 3: Calculate
+Sum the hours. 
+- Apply a **10% Buffer** for testing/verification.
+- **Total Estimate** = (Sum of Task Hours) * 1.10.
+
+## 3. Output Format
+
+You MUST output the estimate in the following Markdown format:
+
+```markdown
+# Development Estimate
+
+## Executive Summary
+* **Total Estimated Time:** [X] Hours
+* **Confidence Level:** [High/Medium/Low] - [Short justification]
+
+## Detailed Breakdown
+
+| Feature / Task | Type | Complexity | Est. Hours | Notes |
+| :--- | :--- | :--- | :--- | :--- |
+| [Task Name 1] | [DB/API/UI/Full-Stack] | [Micro/Small/Med/Large] | [0.XX] | [Brief reasoning] |
+| [Task Name 2] | [DB/API/UI/Full-Stack] | [Micro/Small/Med/Large] | [0.XX] | [Brief reasoning] |
+| ... | ... | ... | ... | ... |
+
+## Total Calculation
+* **Raw Sum:** [Y] Hours
+* **Buffer (10%):** [Z] Hours
+* **Final Estimate:** [Total] Hours
+```
+
+## 4. Instructions
+- Acknowledge this prompt with "Ready to estimate. Please paste the Specification or Codebase details."
+- Wait for user input.</pre>
+                <button class="btn-copy" onclick="copyPrompt()">Copy to Clipboard</button>
+            </div>
         </div>
     </section>
 
@@ -148,4 +224,5 @@ Using the DevVel framework:
 
     <script src="script.js"></script>
 </body>
+
 </html>
