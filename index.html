@@ -135,26 +135,11 @@
             <p style="margin-bottom: 30px; max-width: 700px;">Choose the prompt that matches your workflow. Copy this
                 into your LLM's "System Instructions" or usage preferences.</p>
 
-            <div class="usage-grid">
-                <!-- Option 1: Spec -->
-                <div class="usage-card">
-                    <h3>Option 1: New Feature Spec</h3>
-                    <p>Use this when estimating from a written requirement or JIRA ticket.</p>
-                    <div class="prompt-actions" style="margin-top:15px;">
-                        <button class="btn-copy" onclick="copyPrompt('prompt-spec', this)">Copy Spec Prompt</button>
-                    </div>
-                </div>
-
-                <!-- Option 2: Codebase -->
-                <div class="usage-card">
-                    <h3>Option 2: Existing Codebase</h3>
-                    <p>Use this in <strong>Cursor (.cursorrules)</strong> or when asking an LLM to analyze your repo.
-                    </p>
-                    <div class="prompt-actions" style="margin-top:15px;">
-                        <button class="btn-copy" onclick="copyPrompt('prompt-codebase', this)">Copy Codebase
-                            Prompt</button>
-                    </div>
-                </div>
+            <div class="prompt-tabs">
+                <button class="tab-btn active" onclick="switchPrompt('prompt-spec', this)">Option 1: New Feature
+                    Spec</button>
+                <button class="tab-btn" onclick="switchPrompt('prompt-codebase', this)">Option 2: Existing
+                    Codebase</button>
             </div>
 
             <!-- Hidden raw text for copying -->

@@ -61,21 +61,59 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Initial Calc
     calculate();
+
+    // Prompts Logic
+    let currentPromptId = 'prompt-spec';
+
+    window.switchPrompt = function (elementId, btnElement) {
+        currentPromptId = elementId;
+
+        // Update Tabs
+        document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
+        btnElement.classList.add('active');
+
+        // Update Preview
+        const text = document.getElementById(elementId).textContent;
+        document.getElementById('preview-area').textContent = text;
+    };
+
+    window.copyCurrentPrompt = function (btnElement) {
+        copyPrompt(currentPromptId, btnElement);
+    };
+
+    // Initialize default preview
+    const defaultPrompt = document.getElementById('prompt-spec');
+    if (defaultPrompt) {
+        document.getElementById('preview-area').textContent = defaultPrompt.textContent;
+    }
 });
 
 function copyPrompt(elementId, btnElement) {
-    const text = document.getElementById(elementId).innerText;
-    navigator.clipboard.writeText(text).then(() => {
-        const originalText = btnElement.textContent;
-        btnElement.textContent = "Copied!";
-        btnElement.classList.add('btn-success');
+    const hiddenEl = document.getElementById(elementId);
+    if (!hiddenEl) return;
 
-        // Show preview
-        document.getElementById('preview-area').innerText = text.substring(0, 500) + "\n\n... (Full prompt copied to clipboard)";
+    const text = hiddenEl.textContent; // Using textContent as it works even if element is hidden
 
-        setTimeout(() => {
-            btnElement.textContent = originalText;
-            btnElement.classList.remove('btn-success');
-        }, 2000);
-    });
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(text).then(() => {
+            const originalText = btnElement.textContent;
+            btnElement.textContent = "Copied!";
+            btnElement.classList.add('btn-success');
+
+            // Show preview
+            document.getElementById('preview-area').innerText = text.substring(0, 500) + "\n\n... (Full prompt copied to clipboard)";
+
+            setTimeout(() => {
+                btnElement.textContent = originalText;
+                btnElement.classList.remove('btn-success');
+            }, 2000);
+        }).catch(err => {
+            console.error('Failed to copy: ', err);
+            alert('Failed to copy to clipboard. Please select and copy manually from the preview area below.');
+        });
+    } else {
+        // Fallback for browsers without clipboard API
+        alert('Clipboard API not supported. Please select and copy manually from the preview area below.');
+        document.getElementById('preview-area').innerText = text;
+    }
 }

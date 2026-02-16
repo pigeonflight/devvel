@@ -315,13 +315,64 @@ input[type=range]::-webkit-slider-runnable-track {
 }
 
 /* Prompt Box */
+.prompt-tabs {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+.tab-btn {
+    padding: 12px 24px;
+    background: #f8f8f8;
+    border: 1px solid #ddd;
+    border-top: 3px solid transparent;
+    border-radius: 4px 4px 0 0;
+    cursor: pointer;
+    font-weight: 600;
+    color: #666;
+    transition: 0.2s;
+}
+
+.tab-btn.active {
+    background: #fff;
+    border-bottom: 1px solid #fff;
+    border-top-color: var(--primary-color);
+    color: var(--primary-color);
+}
+
 .prompt-box {
-    background: #f4f4f4;
+    background: #f9f9f9;
+    border: 1px solid #ddd;
+    border-radius: 8px;
     padding: 20px;
-    border-radius: 6px;
     position: relative;
-    font-family: monospace;
-    overflow-x: auto;
+}
+
+.prompt-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 15px;
+}
+
+.prompt-preview-label {
+    font-weight: 600;
+    color: #444;
+    margin: 0;
+}
+
+.preview-content {
+    max-height: 400px;
+    overflow-y: auto;
+    color: #555;
+    background: #fff;
+    padding: 15px;
+    border-radius: 4px;
+    border: 1px solid #eee;
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 0.9rem;
+    line-height: 1.4;
+    white-space: pre-wrap;
 }
 
 .btn-copy {
