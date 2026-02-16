@@ -145,6 +145,9 @@ nav a:hover {
     font-weight: 300;
     font-style: italic;
     opacity: 0.9;
+    font-size: 0.6em;
+    /* Smaller "the" */
+    vertical-align: middle;
 }
 
 .hero-title .bold {
