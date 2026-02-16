@@ -72,6 +72,13 @@ document.addEventListener('DOMContentLoaded', () => {
         document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
         btnElement.classList.add('active');
 
+        // Reset Copy Button
+        const copyBtn = document.getElementById('main-copy-btn');
+        if (copyBtn) {
+            copyBtn.textContent = "Copy Full Prompt";
+            copyBtn.classList.remove('btn-success');
+        }
+
         // Update Preview
         const text = document.getElementById(elementId).textContent;
         document.getElementById('preview-area').textContent = text;
